@@ -3,24 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: bisque;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+    h1, h3 {
+      text-align: center;
+      color:brown;
+      padding: 20px;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style-type: none;
+    }
+    #renderSwapi, #renderPoke {
+      border: darkblue 1px dotted;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: white;
+      width: 20vw;
+    }
+  </style>
   <title>Document</title>
 </head>
 <body>
   <h1>Task to load some data</h1>
-  <div id="renderSwapi"></div>
-  <div id="renderPoke"></div>
+  <div class="container">
+    <div id="renderSwapi">
+      <h3>Starships</h3>
+    </div>
+    <div id="renderPoke">
+      <h3>Pokemons</h3>
+    </div>
+  </div>
+
 </body>
 <script>
 
   var url1 = 'https://cors-anywhere.herokuapp.com/https://swapi.co/api/starships/';
   var url2 = "https://cors-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon-species/1/";
-  var url3 = 'https://cors-anywhere.herokuapp.com/https://jsonplaceholder.typicode.com/users/';
   
 async function getData(url, cb) {
   try {
     const res = await fetch(url);
     const { results } = await res.json();
-    console.log('results in api; ', results);
     cb(results);
   } catch (error) {
     console.log(error);
@@ -29,9 +60,7 @@ async function getData(url, cb) {
 async function getData2(url, cb) {
   try {
     const res = await fetch(url);
-    console.log('url3 res: ', res);
     const { genera } = await res.json();
-    console.log('data in url3; ', genera);
     cb(genera);
   } catch (error) {
     console.log(error);
