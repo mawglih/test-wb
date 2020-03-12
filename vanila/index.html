@@ -41,7 +41,7 @@ async function renderProductList1 (productList, ul1) {
   productList.forEach(function (el) {
     const li = document.createElement('li');
     li.setAttribute('class', 'swapi-li');
-    ul.appendChild(li);
+    ul1.appendChild(li);
     li.innerHTML = li.innerHTML + el.name;
   })
 }
@@ -49,7 +49,7 @@ async function renderProductList2 (productList, ul2) {
   productList.forEach(function (el) {
     const li = document.createElement('li');
     li.setAttribute('class', 'poke-li');
-    ul.appendChild(li);
+    ul2.appendChild(li);
     li.innerHTML = li.innerHTML + el.genus;
   })
 }
