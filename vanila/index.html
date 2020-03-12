@@ -37,7 +37,7 @@ async function getData2(url, cb) {
     console.log(error);
   }
 }
-async function renderProductList1 (productList, ul) {
+async function renderProductList1 (productList, ul1) {
   productList.forEach(function (el) {
     const li = document.createElement('li');
     li.setAttribute('class', 'swapi-li');
@@ -45,7 +45,7 @@ async function renderProductList1 (productList, ul) {
     li.innerHTML = li.innerHTML + el.name;
   })
 }
-async function renderProductList2 (productList, ul) {
+async function renderProductList2 (productList, ul2) {
   productList.forEach(function (el) {
     const li = document.createElement('li');
     li.setAttribute('class', 'poke-li');
@@ -58,7 +58,7 @@ const ul1 = document.createElement('ul');
 const ul2 = document.createElement('ul');
 document.getElementById('renderSwapi').appendChild(ul1);
 document.getElementById('renderPoke').appendChild(ul2);
-getData(url1, renderProductList,ul1);
-getData2(url2, renderProductList,ul2);
+getData(url1, renderProductList1);
+getData2(url2, renderProductList2);
 </script>
 </html>
