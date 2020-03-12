@@ -27,7 +27,7 @@ const List = ({ title }) => {
     actions.swapi(),
     actions.poke(),
   });
-  
+
   return (
     <>
       <h1 className={styles.mainTitle}>{title}</h1>
@@ -35,10 +35,12 @@ const List = ({ title }) => {
         {!shipError && <ListItems 
           loading={shipsLoading}
           listItems={ships}
+          title='Starships'
         />}
         {!pokeError && <ListItems 
           loading={pokeLoading}
           listItems={poke}
+          title='Pokemons'
         />
         }
       </div>
