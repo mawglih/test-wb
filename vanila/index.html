@@ -52,50 +52,38 @@
 
 </body>
 <script>
-
   const url1 = 'https://cors-anywhere.herokuapp.com/https://swapi.co/api/starships/';
   const url2 = "https://cors-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon-species/1/";
 
-async function getData(url, cb) {
-  try {
-    const res = await fetch(url);
-    const { results } = await res.json();
-    cb(results);
-  } catch (error) {
-    console.log(error);
+  async function getData(url, callback) {
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      callback(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
-async function getData2(url, cb) {
-  try {
-    const res = await fetch(url);
-    const { genera } = await res.json();
-    cb(genera);
-  } catch (error) {
-    console.log(error);
-  }
-}
-async function renderProductList1 (productList) {
-  productList.forEach(function (el) {
-    const li = document.createElement('li');
-    li.setAttribute('class', 'swapi-li');
-    ul1.appendChild(li);
-    li.innerHTML = li.innerHTML + el.name;
-  })
-}
-async function renderProductList2 (productList) {
-  productList.forEach(function (el) {
-    const li = document.createElement('li');
-    li.setAttribute('class', 'poke-li');
-    ul2.appendChild(li);
-    li.innerHTML = li.innerHTML + el.genus;
-  })
-}
 
-const ul1 = document.createElement('ul');
-const ul2 = document.createElement('ul');
-document.getElementById('renderSwapi').appendChild(ul1);
-document.getElementById('renderPoke').appendChild(ul2);
-getData(url1, renderProductList1);
-getData2(url2, renderProductList2);
+  function renderLi(container, className, content) {
+    const li = document.createElement('li');
+    li.setAttribute('class', className);
+    li.innerHTML = content;
+    container.appendChild(li);
+  }
+
+  function renderList(url, container, dataSelector, elContentSelector, elClassName) {
+    getData(url, function(data) {
+      const ul = document.createElement('ul');
+      container.appendChild(ul);
+      const results = dataSelector(data);
+      results.forEach(function(el) {
+        renderLi(ul, elClassName, elContentSelector(el));
+      });
+    });
+  }
+
+  renderList(url1, document.getElementById('renderSwapi'), data => data.results, el => el.name, 'swapi-li');
+  renderList(url2, document.getElementById('renderPoke'), data => data.genera, el => el.genus, 'poke-li');
 </script>
 </html>
